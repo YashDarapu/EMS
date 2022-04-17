@@ -1,5 +1,7 @@
 package event.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class AdminDao {
 	
 	public Admin addAdmin(Admin admin) {
 		return arep.save(admin);
+	}
+	
+	public List<Admin> display(){
+		return arep.findAll();
 	}
 
 }

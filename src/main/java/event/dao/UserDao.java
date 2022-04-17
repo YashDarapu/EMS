@@ -1,5 +1,7 @@
 package event.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,7 @@ public class UserDao {
 		return urep.save(user);
 	}
 
-
+	public List<User> display() {
+		return urep.findAll();
+	}
 }

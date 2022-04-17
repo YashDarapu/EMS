@@ -1,25 +1,33 @@
 package event.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+//@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity
 @Table(name="users")
 public class User {
 	
 	@Id
-	private @Getter@Setter int userId;
-	private @Getter@Setter String userName;
-	private @Getter@Setter String userPassword;
-	private @Getter@Setter long phoneNo;
-	private @Getter@Setter String email,address;
+	private int userId;
+	private String userName;
+	private String userPassword;
+	private long phoneNo;
+	private String email,address;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "adminId",referencedColumnName="adminId")
-	private @Getter@Setter Admin admin;
+	//@JsonIgnore
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "adminId")
+    private @Getter@Setter Admin admin;
 
 	public int getUserId() {
 		return userId;

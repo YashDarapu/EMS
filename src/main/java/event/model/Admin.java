@@ -2,8 +2,13 @@ package event.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.*;
 
 @Data
@@ -14,14 +19,18 @@ import lombok.*;
 public class Admin {
 	
 	@Id
-	private @Getter@Setter int adminId;
-	private @Getter@Setter String adminName,adminPassword;
-	
-//	
-//	@OneToMany(cascade = CascadeType.ALL)
-//	//@JoinColumn(name = "userId")
-//	private @Getter@Setter List<User> users=new ArrayList<>();
+	private int adminId;
+	private String adminName,adminPassword;
+	@JsonManagedReference
+	@OneToMany(mappedBy="admin",cascade=CascadeType.ALL)
+	private List<User> users;
 
+	public List<User> getUsers() {
+		return users;
+	}
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 	public int getAdminId() {
 		return adminId;
 	}
