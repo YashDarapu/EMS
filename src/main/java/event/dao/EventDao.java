@@ -23,16 +23,8 @@ public class EventDao implements EventService{
 	AdminRepos arep;
 
 	public Event addEvent(Event event) throws AdminException {
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter adminName:");
-		String name=sc.next();
-		System.out.println("Enter adminPassword:");
-		String pwd=sc.next();
-	
-		if(arep.getAdmin(name,pwd) instanceof Admin)
+		
 			return rep.save(event);
-		else
-			throw new AdminException("Admin Authentication failed..");
 	}
 
 	@Override

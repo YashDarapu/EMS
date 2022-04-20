@@ -15,7 +15,7 @@ import event.model.Status;
 @Repository
 public interface ProductRepo extends JpaRepository<Product,Integer>{
 	
-	@Modifying
+	@Modifying //Used for insert/update/delete queries
 	@Transactional
 	@Query("UPDATE Product p SET p.status=?2 WHERE p.productId=?1")
 	public void cancel(int productId,Status status);

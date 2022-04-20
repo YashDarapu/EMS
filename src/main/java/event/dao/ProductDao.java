@@ -1,5 +1,6 @@
 package event.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -52,16 +53,8 @@ public class ProductDao implements ProductService{
 	}
 	
 	@Override
-	public String cancel(int productId) throws ProductException, UserException {
+	public String cancel(int productId) throws ProductException{
 		
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter userName:");
-		String name=sc.next();
-		System.out.println("Enter userPassword:");
-		String pwd=sc.next();
-		
-		if(urep.getUser(name,pwd) instanceof User)
-		{	
 			Product p=prep.getById(productId);
 		
 		if(p==null)
@@ -77,9 +70,13 @@ public class ProductDao implements ProductService{
 		arep.refund(acc.getAccountId(),price+acc.getBalance());
 		return "Event Canceled";
 		}
-		}
-		else
-			throw new UserException("User Authentication Failed");
+	}
+
+	@Override
+	public Product renewProduct(int productId, Date date, int noOfAttendees) {
+		Product p=prep.getById(productId);
+		
+		return null;
 	}
 
 }

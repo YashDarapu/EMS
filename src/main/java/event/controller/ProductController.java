@@ -54,7 +54,7 @@ public class ProductController {
 	}
 	
 	@PutMapping(path="/cancelEvent/{productId}")
-	public String cancel(@PathVariable int productId) throws ProductException, UserException {
+	public String cancel(@PathVariable int productId) throws ProductException{
 		return pdao.cancel(productId);
 	}
 	
