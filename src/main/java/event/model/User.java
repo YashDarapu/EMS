@@ -1,33 +1,37 @@
 package event.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lombok.*;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-//@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity
 @Table(name="users")
 public class User {
 	
 	@Id
+	@DecimalMin(value="1" , message = "minimum value shoud be one")
 	private int userId;
+	@NotBlank(message = "Enter username")
 	private String userName;
+	@NotBlank(message = "Enter password")
 	private String userPassword;
+	@NotNull(message = "Enter phoneNo")
 	private long phoneNo;
 	private String email,address;
 	
-	//@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="accountId")
+	private Account acc;
+	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "adminId")
-    private @Getter@Setter Admin admin;
+    private Admin admin;
 
 	public int getUserId() {
 		return userId;
@@ -83,5 +87,11 @@ public class User {
 
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
+	}
+	public Account getAcc() {
+		return acc;
+	}
+	public void setAcc(Account acc) {
+		this.acc = acc;
 	}
 }
